@@ -144,13 +144,13 @@ class MIDIInstrumentPlayer {
     func playNoteFromPixel(x: CGFloat, y: CGFloat, screenWidth: CGFloat, screenHeight: CGFloat, instrument: UInt8, duration: TimeInterval) {
         let clampedX = min(max(x, 0), screenWidth)
         let clampedY = min(max(y, 0), screenHeight)
-
+        
         let xFraction = clampedX / screenWidth
         let yFraction = 1.0 - (clampedY / screenHeight)
 
         let pan = Float(xFraction * 2.0 - 1.0)
 
-        let minNote: UInt8 = 48  // C3
+        let minNote: UInt8 = 12  // C3
         let maxNote: UInt8 = 84  // C6
         let note = UInt8(Double(minNote) + Double(maxNote - minNote) * Double(yFraction))
 

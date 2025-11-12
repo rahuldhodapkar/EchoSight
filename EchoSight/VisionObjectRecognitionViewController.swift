@@ -68,11 +68,21 @@ class VisionObjectRecognitionViewController: ViewController {
             detectionOverlay.addSublayer(shapeLayer)
             
             // play a sound corresponding to the label.
-            let instrumentID = stringToUInt8Sum(topLabelObservation.identifier, max: 100)
+            var instrumentID = stringToUInt8Sum(topLabelObservation.identifier, max: 100)
             let objectCenterX = (objectBounds.minX + objectBounds.maxX) / 2
             let objectCenterY = (objectBounds.minY + objectBounds.maxY) / 2
             
-            midiPlayer.playNoteFromPixel(x: objectCenterY, y: objectCenterX, screenWidth: screenHeight, screenHeight: screenWidth, instrument: instrumentID, duration: 0.5)
+            var maybeTarget = false // ***NOTE*** for testin only, make sounds only for "book"
+            for label in objectObservation.labels {
+                if (label.identifier == "spoon" && label.confidence > 0.5) {
+                    maybeTarget = true
+                    instrumentID = stringToUInt8Sum(label.identifier, max: 100)
+                }
+            }
+            
+            if (maybeTarget) {
+                midiPlayer.playNoteFromPixel(x: objectCenterY, y: objectCenterX, screenWidth: screenWidth, screenHeight: screenHeight, instrument: instrumentID, duration: 0.5)
+            }
             
         }
         self.updateLayerGeometry()
