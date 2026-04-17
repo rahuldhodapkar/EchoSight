@@ -20,7 +20,7 @@ xcuserdata/
 **/*.playground/playground.xcworkspace/xcshareddata/*
 !**/*.playground/playground.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 
-project.pbxproj
+# project.pbxproj
 
 # ML Models are too large to be hosted on git
 *.mlmodel

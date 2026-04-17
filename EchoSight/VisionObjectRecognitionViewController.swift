@@ -73,10 +73,13 @@ class VisionObjectRecognitionViewController: ViewController {
             let objectCenterY = (objectBounds.minY + objectBounds.maxY) / 2
             
             var maybeTarget = false // ***NOTE*** for testin only, make sounds only for "book"
+
             for label in objectObservation.labels {
-                if (label.identifier == "spoon" && label.confidence > 0.5) {
+                
+                if (label.identifier == "banana" && label.confidence > 0.5) {
                     maybeTarget = true
                     instrumentID = stringToUInt8Sum(label.identifier, max: 100)
+                    print(label)
                 }
             }
             
